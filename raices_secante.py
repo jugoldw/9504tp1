@@ -18,7 +18,7 @@ def secante(f,a,b,tol):
     x0 = semillas[0]
     x1 = semillas[1]
 
-    while(np.abs(x1 - x0) > tol):
+    while np.abs(x1 - x0) > tol:
         aux = x1
         x1 = x1 - f(x1) * (x1-x0) / (f(x1) - f(x0))
         x0 = aux

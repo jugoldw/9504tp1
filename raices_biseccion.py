@@ -15,7 +15,7 @@ def biseccion(f,a,b,tol):
     x0 = (min+max) / 2
     x1 = (x0 + min) / 2 if np.sign(f(x0)) != np.sign(f(a)) else (x0 + max) / 2
 
-    while(np.abs(x1 - x0) > tol):
+    while np.abs(x1 - x0) > tol:
         aux = x1
 
         if np.sign(f(x1)) != np.sign(f(x0)):
@@ -24,11 +24,11 @@ def biseccion(f,a,b,tol):
             x1 = (min+max) / 2           
 
         else:
-            if(x1 < x0) :
+            if x1 < x0:
                 max = x1
                 x1 = (x1 + min) / 2
 
-            else :
+            else:
                 min = x1
                 x1 = (x1 + max) / 2
 
