@@ -10,29 +10,24 @@ def f3(x):
     return (x - 0.9) * np.exp(-4 * (x - 0.9)**2)
         
 def biseccion(f,a,b,tol):
-    min = np.min([a,b])
-    max = np.max([a,b])
-    x0 = (min+max) / 2
-    x1 = (x0 + min) / 2 if np.sign(f(x0)) != np.sign(f(a)) else (x0 + max) / 2
+    x0 = (a+b) / 2
+    x1 = (x0 + a) / 2 if np.sign(f(x0)) != np.sign(f(a)) else (x0 + b) / 2
 
     while np.abs(x1 - x0) > tol:
-        aux = x1
 
         if np.sign(f(x1)) != np.sign(f(x0)):
-            min = np.min([x0,x1])
-            max = np.max([x0,x1])
-            x1 = (min+max) / 2           
+            a = np.min([x0,x1])
+            b = np.max([x0,x1])       
 
         else:
             if x1 < x0:
-                max = x1
-                x1 = (x1 + min) / 2
+                b = x1
 
             else:
-                min = x1
-                x1 = (x1 + max) / 2
+                a = x1
 
-        x0 = aux
+        x0 = x1
+        x1 = (a+b) / 2
 
     return x1
 

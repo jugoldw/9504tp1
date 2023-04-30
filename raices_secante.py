@@ -9,21 +9,17 @@ def f2(x):
 def f3(x):
     return (x - 0.9) * np.exp(-4 * (x - 0.9)**2)
 
-def biseccion_semillas(f,a,b):
-    x0 = (a+b)/2
-    return [x0, (x0 + a) / 2 if np.sign(f(x0)) != np.sign(f(a)) else (x0 + b) / 2]
-        
 def secante(f,a,b,tol):
-    semillas = biseccion_semillas(f,a,b)
-    x0 = semillas[0]
-    x1 = semillas[1]
+    x0 = (a+b)/2
+    x1 = (x0 + a) / 2 if np.sign(f(x0)) != np.sign(f(a)) else (x0 + b) / 2
+    x2 = x1 - f(x1) * (x1-x0) / (f(x1) - f(x0))
 
-    while np.abs(x1 - x0) > tol:
-        aux = x1
-        x1 = x1 - f(x1) * (x1-x0) / (f(x1) - f(x0))
-        x0 = aux
+    while np.abs(x2 - x1) > tol:
+        x0 = x1
+        x1 = x2
+        x2 = x1 - f(x1) * (x1-x0) / (f(x1) - f(x0))
 
-    return x1
+    return x2
 
 F = [f1,f2,f3]
 
